@@ -104,5 +104,13 @@ $(() => {
         return (data.user.token == user.token)
     }
 
+    createIcons()
+    createStamps()
+    loginArea.hide()
+    chatArea.hide()
+    stampList.hide()
+    loginArea.fadeIn(FADE_TIME)
+
+    let socket = io.connect(url)
 
 })
