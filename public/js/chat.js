@@ -122,5 +122,10 @@ $(() => {
             chatArea.fadeIn(FADE_TIME)
         }
     })
+    //ログアウト処理
+    $('#logout').on('click', () => {
+        chatArea.hide()
+        loginArea.fadeIn(FADE_TIME)
+    })
 
 })
