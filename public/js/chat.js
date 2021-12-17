@@ -113,4 +113,14 @@ $(() => {
 
     let socket = io.connect(url)
 
+    //ログイン処理
+    $('#login').on('click', () => {
+        let name = inputName.val()
+        let icon = $('input[name=icon]:checked').val()
+        if (name && icon) {
+            loginArea.hide()
+            chatArea.fadeIn(FADE_TIME)
+        }
+    })
+
 })
