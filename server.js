@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
         //本人にデータを返す
         socket.emit('logined', data)
         //本人以外すべてにデータを返す
-        socket.broadcast.emit('logined', data)
+        socket.broadcast.emit('user_joined', data)
     })
 
     socket.on('message', (data) => {
