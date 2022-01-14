@@ -186,12 +186,15 @@ $(() => {
             const ctx = canvas.getContext('2d')
             //キャンバスに選択したスタンプ画像を貼り付け
             ctx.drawImage(image, 0, 0)
+            //データエンコード
             const base64 = canvas.toDataURL(mime_type)
             const data = { user: user, image: base64}
-
+            //サーバに送信
             socket.emit('upload_stamp', data)
-
-            stampList.toggle()
         }
+    })
+    //スタンプ受信
+    socket.on('load_stamp', (data) => {
+        createChatImage(data, { width: STAMP_WIDTH })
     })
 })
