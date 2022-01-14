@@ -168,4 +168,30 @@ $(() => {
         addMessage(message)
         updateUserList()
     })
+
+    //スタンプ表示
+    $('.stamp').on('click', () => {
+        stampList.toggle()
+    })
+    //スタンプ送信
+    $('.uploadStamp').on('click', (event) => {
+        const image = new Image()
+        image.src = $(event.target).attr('src')
+        const mime_type = 'image/png'
+
+        image.onload = (e) => {
+            const canvas = document.createElement('canvas')
+            canvas.width = image.naturalWidth
+            canvas.height = image.naturalHeight
+            const ctx = canvas.getContext('2d')
+            //キャンバスに選択したスタンプ画像を貼り付け
+            ctx.drawImage(image, 0, 0)
+            const base64 = canvas.toDataURL(mime_type)
+            const data = { user: user, image: base64}
+
+            socket.emit('upload_stamp', data)
+
+            stampList.toggle()
+        }
+    })
 })
