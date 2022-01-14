@@ -129,9 +129,20 @@ $(() => {
     })
     //ログアウト処理
     $('#logout').on('click', () => {
+        socket.emit('logout')
+        user = {}
+
         chatArea.hide()
         loginArea.fadeIn(FADE_TIME)
     })
+    //ログアウト通知
+    socket.on('user_left', (data) => {
+        users = data.users
+        let message = data.user.name + 'が退出しました'
+        addMessage(message)
+        updateUserList()
+    })
+
     //メッセージ送信
     $('#send').on('click', () => {
         socket.emit('message', {
