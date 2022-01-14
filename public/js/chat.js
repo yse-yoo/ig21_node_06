@@ -132,7 +132,18 @@ $(() => {
         chatArea.hide()
         loginArea.fadeIn(FADE_TIME)
     })
-
+    //メッセージ送信
+    $('#send').on('click', () => {
+        socket.emit('message', {
+            message: message.val(),
+            user: user,
+        })
+        message.val() = ''
+    })
+    //メッセージ受信
+    socket.on('message', (data) => {
+        createChatMessage(data)
+    })
     //受信
     socket.on('logined', (data) => {
         user = data.user
