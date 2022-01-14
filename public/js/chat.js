@@ -213,5 +213,9 @@ $(() => {
             $('.uploadImage').val() = ''
         }
     })
+    //画像受信
+    socket.on('load_image', (data) => {
+        createChatImage(data, { width: IMAGE_WIDTH })
+    })
 
 })
