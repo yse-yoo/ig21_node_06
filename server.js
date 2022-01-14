@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
         //ユーザ一覧からIDでユーザ取得
         const user = users[socket.id]
         //ユーザ一覧から削除
-        delete users[socket.io]
+        delete users[socket.id]
         //ログアウトユーザ以外に通知
         socket.broadcast.emit('user_left', {
             user: user,
@@ -59,6 +59,10 @@ io.on('connection', (socket) => {
     }
 
     socket.on('logout', () => {
+        logout(socket)
+    })
+    socket.on('disconnect', () => {
+        console.log('disconnect')
         logout(socket)
     })
 })
